@@ -45,8 +45,113 @@ def vegetation_sightings(request):
 def image(request):
     with connection.cursor() as cursor:
         cursor.execute(
-            'SELECT sighting_id, image_url FROM api_image_sighting ORDER BY sighting_id'
+            'SELECT sighting_id, image_url FROM api_sighting_image ORDER BY sighting_id'
         )
         columns = [col[0] for col in cursor.description]
         rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+    return JsonResponse(rows, safe=False)
+
+def species(request):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            '''
+            SELECT
+                s.id,
+                s.common_name,
+                s.scientific_name,
+                s.is_game_species,
+                s.conservation_status,
+                s.description,
+                c.name AS category
+            FROM api_species s
+            JOIN api_speciescategory c
+                ON s.category_id = c.id
+            ORDER BY s.common_name
+            '''
+        )
+
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    return JsonResponse(rows, safe=False)
+
+def regions(request):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            '''
+            SELECT
+                id,
+                name,
+                region_type,
+                min_lat,
+                max_lat,
+                min_lon,
+                max_lon,
+                elevation_ft
+            FROM api_region
+            ORDER BY name
+            '''
+        )
+
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    return JsonResponse(rows, safe=False)
+
+def habitats(request):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            '''
+            SELECT
+                id,
+                name
+            FROM api_habitat
+            ORDER BY name
+            '''
+        )
+
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    return JsonResponse(rows, safe=False)
+
+def weather_conditions(request):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            '''
+            SELECT
+                id,
+                name
+            FROM api_weathercondition
+            ORDER BY name
+            '''
+        )
+
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    return JsonResponse(rows, safe=False)
+
+def hunting_seasons(request):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            '''
+            SELECT
+                hs.id,
+                s.common_name AS species,
+                hs.zone,
+                hs.weapon,
+                hs.open_month_day,
+                hs.close_month_day,
+                hs.notes
+            FROM api_huntingseason hs
+            JOIN api_species s
+                ON hs.species_id = s.id
+            ORDER BY s.common_name, hs.open_month_day
+            '''
+        )
+
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
     return JsonResponse(rows, safe=False)

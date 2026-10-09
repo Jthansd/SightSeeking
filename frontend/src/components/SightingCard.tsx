@@ -1,12 +1,18 @@
-import type { Sighting } from "../types";
+import { SIGHTING_TYPE_LABELS, type Sighting } from "../types";
+
+import "./SightingCard.css";
 
 type Props = { sighting: Sighting };
 
 export default function SightingCard({ sighting }: Props) {
+  const when = new Date(sighting.observed_at ?? sighting.timestamp).toLocaleString();
+
   return (
-    <div style={{ border: "4px solid #ccc", padding: 8, margin: "8px 0", borderRadius: 4 }}>
-      <h3>{sighting.species}</h3>
-      <p>{sighting.location} · {sighting.date}</p>
+    <div className="card">
+      <span className="tag">{SIGHTING_TYPE_LABELS[sighting.sighting_type]}</span>
+      <p>{sighting.description}</p>
+      {sighting.sighting_type === "ANIMAL" && <p>Count: {sighting.animal_count}</p>}
+      <small>{when}</small>
     </div>
   );
 }

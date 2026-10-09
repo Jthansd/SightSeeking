@@ -1,39 +1,42 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import SightingCard from "./components/SightingCard";
+import type { Sighting } from "./types";
 
-type Member = {
-  id: number;
-  first_name: string;
-  last_name: string;
-  grade_in_years: number;
-};
-
-const API_URL = "http://127.0.0.1:8000";
+const starterSightings: Sighting[] = [
+  { id: 1, species: "Red-tailed Hawk", location: "Balboa Park", date: "2026-10-01" },
+  { id: 2, species: "Coyote", location: "Mission Trails", date: "2026-10-03" },
+];
 
 export default function App() {
-  const [members, setMembers] = useState<Member[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [sightings, setSightings] = useState<Sighting[]>(starterSightings);
+  const [species, setSpecies] = useState("");
 
-  useEffect(() => {
-    fetch(`${API_URL}/api/members/`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data: Member[]) => setMembers(data))
-      .catch((e: Error) => setError(e.message));
-  }, []);
+  function addSighting() {
+    if (species.trim() === "") return;
+    const newSighting: Sighting = {
+      id: Date.now(),
+      species: species,
+      location: "Unknown",
+      date: new Date().toLocaleDateString(),
+    };
+    setSightings([newSighting, ...sightings]);   // build a new array; don't push into the old one
+    setSpecies("");
+  }
 
   return (
-    <main>
-      <h1>Members</h1>
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {members.map((m) => (
-          <li key={m.id}>
-            {m.first_name} {m.last_name} (grade {m.grade_in_years})
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div style={{ maxWidth: 600, margin: "0 auto", padding: 16 }}>
+      <h1>Wildlife Tracker</h1>
+
+      <input
+        value={species}
+        onChange={(e) => setSpecies(e.target.value)}
+        placeholder="What did you see?"
+      />
+      <button onClick={addSighting}>Add</button>
+
+      {sightings.map((s) => (
+        <SightingCard key={s.id} sighting={s} />
+      ))}
+    </div>
   );
 }

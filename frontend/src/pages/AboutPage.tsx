@@ -1,5 +1,5 @@
 import badge from "../assets/sight-seeking-badge.png";
-import MemberCard, {type Member} from "../components/MemberCard";
+import MemberCard from "../components/MemberCard";
 import { members } from "../data/members";
 
 

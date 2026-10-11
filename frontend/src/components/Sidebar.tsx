@@ -1,13 +1,30 @@
 import { Link } from "react-router-dom";
+import "./Sidebar.css";
 
-export default function Sidebar() {
+type Props = {
+  isOpen: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+};
 
-    return(
-        <nav className="sidebar">
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/blog">Blog</Link>
-        </nav>
-    );
+export default function Sidebar({ isOpen, onToggle, onClose }: Props) {
+  return (
+    <nav className={`sidebar ${isOpen ? "open" : ""}`}>
+      <button
+        className="sidebar-toggle"
+        onClick={onToggle}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+      >
+        {isOpen ? "✕" : "☰"}
+      </button>
 
+      {isOpen && (
+        <div className="sidebar-links">
+          <Link to="/" onClick={onClose}>Home</Link>
+          <Link to="/about" onClick={onClose}>About</Link>
+          <Link to="/blog" onClick={onClose}>Blog</Link>
+        </div>
+      )}
+    </nav>
+  );
 }

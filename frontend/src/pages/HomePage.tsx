@@ -13,7 +13,8 @@ export default function HomePage() {
     async function loadSightings() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/sightings/",
+          // "http://127.0.0.1:8000/api/sightings/",
+          "/api/sightings",
           { signal: controller.signal }
         );
 

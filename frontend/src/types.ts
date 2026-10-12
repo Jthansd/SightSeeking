@@ -31,3 +31,13 @@ export const SIGHTING_TYPE_LABELS: Record<SightingType, string> = {
   VIEWING: "Viewing",
   OTHER: "Other",
 };
+
+export type SightingApiResponse = {
+  id: number;
+  user_id: number;
+  sighting_type: SightingType;
+  timestamp: string;
+  description: string;
+  locationLongitude: number;
+  locationLatitude: number;
+};

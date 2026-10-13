@@ -23,6 +23,7 @@ export default function Sidebar({ isOpen, onToggle, onClose }: Props) {
           <Link to="/" onClick={onClose}>Home</Link>
           <Link to="/about" onClick={onClose}>About</Link>
           <Link to="/blog" onClick={onClose}>Blog</Link>
+          <Link to="/links" onClick={onClose}>Links</Link>
         </div>
       )}
     </nav>

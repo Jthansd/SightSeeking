@@ -187,3 +187,279 @@
 .page-content {
   margin-left: 56px;  
 }
+
+/* ===== Sight Seeking Homepage ===== */
+
+.home {
+  width: 100%;
+  padding: 32px 48px 60px;
+  background: var(--bg);
+}
+
+.hero {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.hero-content {
+  padding: 24px 0;
+}
+
+.eyebrow {
+  color: var(--green-3);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.hero-text {
+  max-width: 700px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primary-button {
+  background: var(--gold);
+  color: #1d2f22;
+}
+
+.primary-button:hover {
+  background: var(--gold-hover);
+}
+
+.secondary-button,
+.text-button {
+  background: #ffffff;
+  color: var(--green);
+  border: 1px solid var(--border);
+}
+
+.hero-panel,
+.status-card,
+.map-card,
+.quick-guide {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.hero-panel {
+  padding: 24px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.stat-item {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  color: var(--green);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.section-block {
+  max-width: 1200px;
+  margin: 0 auto 42px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.status-card {
+  padding: 28px;
+}
+
+.sightings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.map-card,
+.quick-guide {
+  padding: 24px;
+}
+
+.map-placeholder {
+  min-height: 300px;
+  border-radius: 10px;
+  border: 1px dashed #b8b2a6;
+  background: #ece7dc !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.guide-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.guide-links button {
+  background: var(--surface-soft);
+  color: var(--green);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .home {
+    padding: 24px;
+  }
+
+  .hero,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sightings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Report Sighting Page ===== */
+
+.report-page {
+  width: 100%;
+  padding: 40px 24px 70px;
+  background: var(--bg);
+}
+
+.report-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.report-heading {
+  margin-bottom: 24px;
+}
+
+.report-heading h1 {
+  margin-bottom: 10px;
+}
+
+.report-form {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--shadow);
+  padding: 28px;
+  color: var(--text);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-weight: 700;
+  color: var(--green);
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green-3);
+  box-shadow: 0 0 0 3px rgba(47, 111, 73, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.report-form .primary-button {
+  background: var(--gold);
+  color: var(--green);
+  padding: 12px 20px;
+}
+
+.report-form .primary-button:hover {
+  background: var(--gold-hover);
+}
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .report-page {
+    padding: 28px 16px 50px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 type Props = {
@@ -8,23 +8,43 @@ type Props = {
 };
 
 export default function Sidebar({ isOpen, onToggle, onClose }: Props) {
-  return (
-    <nav className={`sidebar ${isOpen ? "open" : ""}`}>
-      <button
-        className="sidebar-toggle"
-        onClick={onToggle}
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-      >
-        {isOpen ? "✕" : "☰"}
-      </button>
+  const navigate = useNavigate();
 
-      {isOpen && (
-        <div className="sidebar-links">
-          <Link to="/" onClick={onClose}>Home</Link>
-          <Link to="/about" onClick={onClose}>About</Link>
+  return (
+    <nav className="top-nav">
+      <div className="nav-inner">
+        <Link to="/" className="nav-brand" onClick={onClose}>
+          Sight Seeking
+        </Link>
+
+        <button
+          className="mobile-menu-toggle"
+          onClick={onToggle}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
+          {isOpen ? "✕" : "☰"}
+        </button>
+
+        <div className={`nav-links ${isOpen ? "open" : ""}`}>
+          <Link to="/" onClick={onClose}>Explore</Link>
+          <Link to="/" onClick={onClose}>Species</Link>
+          <Link to="/" onClick={onClose}>Finder</Link>
+          <Link to="/" onClick={onClose}>Hunting Seasons</Link>
+          <Link to="/" onClick={onClose}>Stats</Link>
           <Link to="/blog" onClick={onClose}>Blog</Link>
+          <Link to="/about" onClick={onClose}>About</Link>
+
+          <button
+            className="nav-report-button"
+            onClick={() => {
+              onClose();
+              navigate("/report");
+            }}
+          >
+            Report a Sighting
+          </button>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

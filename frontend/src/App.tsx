@@ -6,6 +6,7 @@ import BlogPage from "./pages/BlogPage";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
 import "./AboutPage.css";
+import ReportSightingPage from "./pages/ReportSightingPage";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function App() {
 
       <main className="page-content">
         <Routes>
+          <Route path="/report" element={<ReportSightingPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />

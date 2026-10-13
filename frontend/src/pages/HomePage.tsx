@@ -1,64 +1,12 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SightingCard from "../components/SightingCard";
-import {
-  SIGHTING_TYPE_LABELS,
-  type SightingApiResponse,
-  type SightingType,
-} from "../types";
-
-type AddSightingFormProps = {
-  onAdd: (sightingType: SightingType, notes: string, dateTime: Date) => void;
-};
-
-// Demo-only form: entries are kept in page state and never sent to the database.
-function AddSightingForm({ onAdd }: AddSightingFormProps) {
-  const [sightingType, setSightingType] = useState<SightingType>("ANIMAL");
-  const [notes, setNotes] = useState("");
-  const [dateTime, setDateTime] = useState("");
-
-  const handleAddSighting = (e: FormEvent) => {
-    e.preventDefault();
-    if (!notes.trim()) return;
-
-    // Fall back to "now" if the user leaves the date blank.
-    onAdd(sightingType, notes.trim(), dateTime ? new Date(dateTime) : new Date());
-
-    setNotes("");
-    setDateTime("");
-  };
-
-  return (
-    <form className="add-sighting-form" onSubmit={handleAddSighting}>
-      <select
-        value={sightingType}
-        onChange={(e) => setSightingType(e.target.value as SightingType)}
-      >
-        {Object.entries(SIGHTING_TYPE_LABELS).map(([value, label]) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-      <textarea
-        placeholder="Notes (e.g. Brown pelican diving near the pier)"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        required
-      />
-      <input
-        type="datetime-local"
-        value={dateTime}
-        onChange={(e) => setDateTime(e.target.value)}
-      />
-      <button type="submit">Add Sighting!</button>
-    </form>
-  );
-}
+import type { SightingApiResponse } from "../types";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   const [sightings, setSightings] = useState<SightingApiResponse[]>([]);
-  // Sightings entered on this page; kept separate so the API load can't overwrite them.
-  const [addedSightings, setAddedSightings] = useState<SightingApiResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,11 +15,9 @@ export default function HomePage() {
 
     async function loadSightings() {
       try {
-        const response = await fetch(
-          // "http://127.0.0.1:8000/api/sightings/",
-          "/api/sightings",
-          { signal: controller.signal }
-        );
+        const response = await fetch("/api/sightings", {
+          signal: controller.signal,
+        });
 
         if (!response.ok) {
           throw new Error("Failed to load sightings");
@@ -97,61 +43,131 @@ export default function HomePage() {
     return () => controller.abort();
   }, []);
 
-  const handleAddSighting = (
-    sightingType: SightingType,
-    notes: string,
-    dateTime: Date
-  ) => {
-    const newSighting: SightingApiResponse = {
-      id: Date.now(), // temporary unique id; the database would assign a real one
-      user_id: 0,
-      sighting_type: sightingType,
-      timestamp: dateTime.toISOString(),
-      description: notes,
-      locationLongitude: 0,
-      locationLatitude: 0,
-    };
-
-    // Newest entries go on top of the list.
-    setAddedSightings((prev) => [newSighting, ...prev]);
-  };
-
-  const allSightings = [...addedSightings, ...sightings];
-
   return (
-    <div className="home">
-      <section className="intro">
-        <h1>Sight Seeking</h1>
-        <p>
-          Spotted something worth exploring? Share it so others can find it too.
-        </p>
+    <main className="home">
+      <section className="hero">
+        <div className="hero-content">
+          <p className="eyebrow">Explore. Discover. Share.</p>
+
+          <h1>Find wildlife worth exploring.</h1>
+
+          <p className="hero-text">
+            Sight Seeking helps nature enthusiasts discover wildlife sightings,
+            explore species, and share their own encounters with the community.
+          </p>
+
+          <div className="hero-actions">
+            <button
+              className="primary-button"
+              onClick={() => navigate("/report")}
+            >
+              Report a Sighting
+            </button>
+
+            <button className="secondary-button">
+              Explore Sightings
+            </button>
+          </div>
+        </div>
+
+        <div className="hero-panel card">
+          <h3>Community Snapshot</h3>
+
+          <div className="stat-grid">
+            <div className="stat-item">
+              <span className="stat-number">{sightings.length}</span>
+              <span className="stat-label">Sightings</span>
+            </div>
+
+            <div className="stat-item">
+              <span className="stat-number">40</span>
+              <span className="stat-label">Species</span>
+            </div>
+
+            <div className="stat-item">
+              <span className="stat-number">18</span>
+              <span className="stat-label">Regions</span>
+            </div>
+
+            <div className="stat-item">
+              <span className="stat-number">15</span>
+              <span className="stat-label">Habitats</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div className="add-sighting">
-        <h2>Add a New Sighting</h2>
-        <p>Share your wildlife encounters with the community!</p>
-        <AddSightingForm onAdd={handleAddSighting} />
-      </div>
+      <section className="section-block">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Latest Activity</p>
+            <h2>Recent Sightings</h2>
+          </div>
 
-      <div className="home-layout">
-        <section>
-          <h2>Recent Sightings</h2>
+          <button className="text-button">
+            View All Sightings
+          </button>
+        </div>
 
-          {loading && <p>Loading sightings...</p>}
+        {loading && (
+          <div className="status-card card">
+            <p>Loading sightings...</p>
+          </div>
+        )}
 
-          {error && <p>Unable to load sightings: {error}</p>}
+        {error && (
+          <div className="status-card card">
+            <p>Unable to load sightings: {error}</p>
+          </div>
+        )}
 
-          {!loading && allSightings.length === 0 && (
-            <p>No sightings available yet.</p>
-          )}
+        {!loading && !error && sightings.length === 0 && (
+          <div className="status-card card">
+            <h3>No sightings yet</h3>
+            <p>
+              Add the first wildlife sighting to start building the community
+              field guide.
+            </p>
+          </div>
+        )}
 
-          {allSightings.map((s) => (
-            <SightingCard key={s.id} sighting={s} />
-          ))}
-        </section>
+        {!loading && !error && sightings.length > 0 && (
+          <div className="sightings-grid">
+            {sightings.slice(0, 6).map((sighting) => (
+              <SightingCard
+                key={sighting.id}
+                sighting={sighting}
+              />
+            ))}
+          </div>
+        )}
+      </section>
 
-        <aside className="map-placeholder">Map coming soon</aside>
-      </div>
-    </div>
+      <section className="dashboard-grid section-block">
+        <div className="map-card card">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Explore Nearby</p>
+              <h2>Wildlife Map</h2>
+            </div>
+          </div>
+
+          <div className="map-placeholder">
+            <span>Interactive map coming soon</span>
+          </div>
+        </div>
+
+        <div className="quick-guide card">
+          <p className="eyebrow">Field Guide</p>
+          <h2>Start Exploring</h2>
+
+          <div className="guide-links">
+            <button>Browse Species</button>
+            <button>Find Wildlife</button>
+            <button>View Hunting Seasons</button>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

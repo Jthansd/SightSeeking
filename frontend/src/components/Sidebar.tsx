@@ -33,6 +33,7 @@ export default function Sidebar({ isOpen, onToggle, onClose }: Props) {
           <Link to="/" onClick={onClose}>Stats</Link>
           <Link to="/blog" onClick={onClose}>Blog</Link>
           <Link to="/about" onClick={onClose}>About</Link>
+          <Link to="/links" onClick={onClose}>Links</Link>
 
           <button
             className="nav-report-button"

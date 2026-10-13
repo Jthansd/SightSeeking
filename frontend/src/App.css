@@ -187,3 +187,13 @@
 .page-content {
   margin-left: 56px;  
 }
+.add-sighting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+}
+
+.add-sighting-form textarea {
+  min-height: 80px;
+}

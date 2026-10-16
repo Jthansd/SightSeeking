@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SightingCard from "../components/SightingCard";
 import type { SightingApiResponse } from "../types";
+import { API_URL } from "../api";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function HomePage() {
 
     async function loadSightings() {
       try {
-        const response = await fetch("/api/sightings", {
+        const response = await fetch(`${API_URL}/api/sightings/`, {
           signal: controller.signal,
         });
 

@@ -136,4 +136,8 @@ MAILERS = {
     },
 }
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+# Comma-separated list of sites allowed to call this API from the browser.
+# On Render, set e.g. "https://sightseeking.pages.dev,http://localhost:5173".
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    "CORS_ALLOWED_ORIGINS", "http://localhost:5173"
+).split(",")

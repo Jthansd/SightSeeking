@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../api";
 
 type SpeciesOption = {
   id: number;
@@ -31,7 +32,7 @@ export default function ReportSightingPage() {
   useEffect(() => {
     async function loadSpecies() {
       try {
-        const response = await fetch("/api/species/");
+        const response = await fetch(`${API_URL}/api/species/`);
 
         if (!response.ok) {
           throw new Error("Failed to load species.");
@@ -70,7 +71,7 @@ export default function ReportSightingPage() {
     setSuccess(null);
 
     try {
-      const response = await fetch("/api/sightings/", {
+      const response = await fetch(`${API_URL}/api/sightings/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

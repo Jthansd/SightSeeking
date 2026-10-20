@@ -4,7 +4,7 @@ export const members: Member[] = [
   {
     name: "Jonathan Wilson",
     pfp: "/team/jonathanpfp.png",
-    bio: "Jonathan has a bachelor's degree in Software Engineering, and is now studying for a master's degree in Computer Science at San Diego State University. He looks forward to contributing to our team's success and engineering the means to allow our users to experience the great outdoors on a new level.",
+    bio: "Jonathan has a bachelor's degree in Software Engineering, and is now studying for a master's degree in Computer Science at San Diego State University. He looks forward to contributing to our team's success by engineering the frontend of the project, collaborating with the backend engineers, and deploying the site online. He hopes that Sight Seeking will allow our users to experience the great outdoors on a new level.",
     blog: "Born and raised in San Diego, I've come to know the county well: its wildlife, its hidden spots, and where to find the best views. Even so, I still stumble onto new trails, overlooks, and corners worth exploring. That sense of discovery is a big part of why we built Sight Seeking. Our hope is that people who love the outdoors can share what they've seen on a platform made specifically for them. As a local, I'm excited to share San Diego's nature with my fellow San Diegans, and as someone who travels often, I'm just as excited to have a way to find wildlife in places I don't know. That's what sets Sight Seeking apart: it's built for spontaneity and discovery. You don't need to already know a spot, have an address, or plan a route ahead of time. Instead, you can open the map, see what others have spotted nearby, and add your own sightings for the next person to find."  
   },
   { 
@@ -27,6 +27,7 @@ export const members: Member[] = [
   {
     name: "Christena Bell",
     bio: "Christena Bell is a fourth year computer student at San Diego State with a interest in cyber security. She is helping Seth with the contribution to the backend development of the SightSeeking and just adding an additional support. She looking forward to seeing the outcome of what her and team can create while applying the learning from this course. She also looking forward to finish up this semester then doing one final run before obtaining her degree.",
+    blog: "Growing up, I've always loved animals and learning about wildlife. I used to spend a lot of time watching Animal Planet and learning about different animals and their habitats. Recently, I’ve been getting back into hiking and spending more time outdoors, so I thought SightSeeking was a really cool idea. I like that people can use the website to record animals they see while hiking and discover what other people have spotted in the same area. It's something I could actually see myself using. As a Computer Science student at San Diego State University, my main role in this project is working on the frontend of the website. I'm focused on how the website looks, how the pages are organized, and making it easy for people to use. Along with my other teammates. Working on SightSeeking has helped me better understand how the frontend connects with the backend and database. I enjoy being part of this project because it combines my interest in animals and nature with what I'm learning in computer science."
   },
   {
     name: "Vlad Jerohhin",

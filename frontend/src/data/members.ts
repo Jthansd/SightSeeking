@@ -14,7 +14,8 @@ export const members: Member[] = [
     blog: "For me, Sight Seeking is interesting because it takes a real-world idea and turns it into a database-driven application. My main work on the project focused on the backend, where I helped build the Django models and API endpoints that organize and return wildlife sighting data. I also worked with data for species, regions, habitats, weather conditions, and hunting seasons so the site could support more detailed sightings. One of the biggest things I learned from this project is how the frontend, backend, and database all need to work together. A website can look good, but the database and API are what make the information useful, searchable, and dynamic."
   },
   { 
-    name: "Fadhil Al Salihi", 
+    name: "Fadhil Al Salihi",
+    pfp: "/team/fadhilpfp.jpg", 
     bio: "Fadhil holds a bachelor's degree in Software Engineering from California State University San Marcos and is currently pursuing a master's degree in Computer Science at San Diego State University. He has a strong background in software development, cloud computing, and systems engineering. He looks forward to contributing his technical skills to the SightSeeking project and helping create a platform that connects people through wildlife and nature exploration.",
     blog: "SightSeeking is a database-driven web application designed to help users record, organize, and explore wildlife and nature sightings in their communities. Users can add a sighting by providing information such as the species, location, date and time, notes, and images, while other users can explore sightings that have been shared. What makes SightSeeking unique is that it combines wildlife exploration with an organized database system, allowing users to not only share what they see but also discover what others have observed in different locations. Instead of simply posting a wildlife picture, SightSeeking connects each sighting with useful information about the species, including where and when it was spotted. Our goal is to create a simple and useful platform that encourages people to explore nature while building a growing collection of wildlife sighting data."
   },
@@ -24,11 +25,12 @@ export const members: Member[] = [
   },
   {
     name: "Christena Bell",
-    bio: "Christena needs to add an introduction here :)"
+    bio: "Christena Bell is a fourth year computer student at San Diego State with a interest in cyber security. She is helping Seth with the contribution to the backend development of the SightSeeking and just adding an additional support. She looking forward to seeing the outcome of what her and team can create while applying the learning from this course. She also looking forward to finish up this semester then doing one final run before obtaining her degree.",
   },
   {
     name: "Vlad Jerohhin",
-    bio: "Vlad needs to add an introduction here :)"
+    bio: "Vlad is a 4th year student at SDSU majoring in Computer Science. He will work on some of the backend and help fill in a database to start. He will also review things for bugs and errors before release. He looks forward to working with the team and helping the SightSeeking project to get up and running so curious nature goers can enjoy the outdoors like never before.",
+    blog: "Sight Seeking is a project designed to make exploring nature and discovering wildlife easier and more enjoyable. The website allows users to share their wildlife sightings, explore what others have spotted, and discover new locations through an interactive map. One of the things I like most about the project is how it encourages people to get outdoors and explore places they might not have known about. Whether someone enjoys hiking, photography, or just being outside, Sight Seeking gives them a simple way to connect with nature. I also contributed to the backend and helped come up with and implement some QOL features to improve the user experience. Overall, working on this project has been a great learning experience, and I hope it becomes a useful tool for anyone interested in the outdoors.",
   }
 
 

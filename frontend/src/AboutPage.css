@@ -47,3 +47,75 @@
     text-align: center;
   }
 }
+/* =========================================================
+   TEXT PAGES (About Us, Instructions, Links)
+   Same padding and width as the Report page; centered text.
+   ========================================================= */
+
+.text-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+  text-align: center;
+}
+
+.text-page .about-badge {
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.text-page section {
+  margin-top: 48px;
+}
+
+.text-page h2 {
+  margin-top: 48px;
+}
+
+.text-page section > h2:first-child {
+  margin-top: 0;
+}
+
+.text-page h3 {
+  margin: 32px 0 8px;
+}
+
+.text-page h4 {
+  margin: 20px 0 4px;
+  font-size: 17px;
+}
+
+.text-page p {
+  max-width: 760px;
+  margin: 0 auto 12px;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* Member cards keep their photo-beside-text layout */
+.text-page .member-card {
+  text-align: left;
+}
+
+.text-page .member-card p {
+  max-width: none;
+  margin: 0;
+}
+
+/* Links page: one link per line */
+.link-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .text-page {
+    padding: 28px 16px 50px;
+  }
+}

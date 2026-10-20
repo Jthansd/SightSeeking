@@ -1,0 +1,62 @@
+.source-code {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+.source-code section {
+  margin-top: 40px;
+}
+
+.source-code section > p {
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.repo-box {
+  padding: 20px 24px;
+  border-left: 6px solid var(--gold);
+}
+
+.repo-box h3 {
+  margin-bottom: 6px;
+}
+
+.repo-box a {
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.code-block {
+  margin: 0 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.code-block figcaption {
+  padding: 8px 16px;
+  background: var(--green);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 16px;
+  background: #1e2a22;
+  overflow-x: auto;
+}
+
+/* Override the inline <code> pill style from index.css inside code blocks */
+.code-block pre code {
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: #e8efe9;
+  font-size: 13px;
+  line-height: 1.55;
+}

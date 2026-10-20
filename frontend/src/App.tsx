@@ -8,6 +8,8 @@ import LinksPage from "./pages/Links";
 import "./App.css";
 import "./AboutPage.css";
 import ReportSightingPage from "./pages/ReportSightingPage";
+import InstructionsPage from "./pages/InstructionsPage";
+import SourceCode from "./pages/SourceCode";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +29,8 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/links" element={<LinksPage />} />
+          <Route path="/instructions" element={<InstructionsPage />} />
+          <Route path="/source-code" element={<SourceCode />} />
         </Routes>
       </main>
     </BrowserRouter>

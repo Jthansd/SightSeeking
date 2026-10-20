@@ -27,13 +27,15 @@ export default function Sidebar({ isOpen, onToggle, onClose }: Props) {
 
         <div className={`nav-links ${isOpen ? "open" : ""}`}>
           <Link to="/" onClick={onClose}>Explore</Link>
-          <Link to="/" onClick={onClose}>Species</Link>
-          <Link to="/" onClick={onClose}>Finder</Link>
-          <Link to="/" onClick={onClose}>Hunting Seasons</Link>
-          <Link to="/" onClick={onClose}>Stats</Link>
+          {/* <Link to="/" onClick={onClose}>Species</Link> */}
+          {/* <Link to="/" onClick={onClose}>Stats</Link> */}
           <Link to="/blog" onClick={onClose}>Blog</Link>
-          <Link to="/about" onClick={onClose}>About</Link>
+          <Link to="/about" onClick={onClose}>About Us</Link>
+          <Link to="/instructions" onClick={onClose}>Instructions</Link>
           <Link to="/links" onClick={onClose}>Links</Link>
+          {/* <Link to="/" onClick={onClose}>Finder</Link> */}
+          {/* <Link to="/" onClick={onClose}>Hunting Seasons</Link> */}
+          
 
           <button
             className="nav-report-button"

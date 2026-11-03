@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../api";
@@ -66,9 +67,57 @@ export default function ReportSightingPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    setSubmitting(true);
     setError(null);
     setSuccess(null);
+
+    // Validate species
+    if (!formData.species) {
+      setError("Please select a species.");
+      return;
+    }
+
+    // Validate date and time
+    if (!formData.observedAt) {
+      setError("Please enter the date and time of the sighting.");
+      return;
+    }
+
+    // Validate latitude
+    const latitude = Number(formData.latitude);
+
+    if (
+      formData.latitude.trim() === "" ||
+      !Number.isFinite(latitude) ||
+      latitude < -90 ||
+      latitude > 90
+    ) {
+      setError("Latitude must be a number between -90 and 90.");
+      return;
+    }
+
+    // Validate longitude
+    const longitude = Number(formData.longitude);
+
+    if (
+      formData.longitude.trim() === "" ||
+      !Number.isFinite(longitude) ||
+      longitude < -180 ||
+      longitude > 180
+    ) {
+      setError("Longitude must be a number between -180 and 180.");
+      return;
+    }
+
+    // Validate animal count
+    if (
+      !Number.isInteger(Number(formData.animalCount)) ||
+      Number(formData.animalCount) < 1
+    ) {
+      setError("Number spotted must be a whole number greater than zero.");
+      return;
+    }
+
+    setSubmitting(true);
 
     try {
       const response = await fetch(`${API_URL}/api/sightings/`, {
@@ -122,7 +171,11 @@ export default function ReportSightingPage() {
           </p>
         </div>
 
-        <form className="report-form card" onSubmit={handleSubmit}>
+        <form
+          className="report-form card"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <div className="form-grid">
             <div className="form-group">
               <label htmlFor="species">Species</label>
@@ -175,6 +228,8 @@ export default function ReportSightingPage() {
                 name="latitude"
                 type="number"
                 step="any"
+                min="-90"
+                max="90"
                 placeholder="Example: 32.9595"
                 value={formData.latitude}
                 onChange={handleChange}
@@ -190,6 +245,8 @@ export default function ReportSightingPage() {
                 name="longitude"
                 type="number"
                 step="any"
+                min="-180"
+                max="180"
                 placeholder="Example: -116.5797"
                 value={formData.longitude}
                 onChange={handleChange}
@@ -205,6 +262,7 @@ export default function ReportSightingPage() {
                 name="animalCount"
                 type="number"
                 min="1"
+                step="1"
                 value={formData.animalCount}
                 onChange={handleChange}
                 required
@@ -250,6 +308,7 @@ export default function ReportSightingPage() {
 
           {error && (
             <p
+              role="alert"
               style={{
                 color: "#a12626",
                 marginBottom: "16px",
@@ -262,6 +321,7 @@ export default function ReportSightingPage() {
 
           {success && (
             <p
+              role="status"
               style={{
                 color: "#245a3b",
                 marginBottom: "16px",

@@ -48,7 +48,7 @@ export default function HomePage() {
     <main className="home">
       <section className="hero">
         <div className="hero-content">
-          <p className="eyebrow">Explore. Discover. Share.</p>
+          <p className="eyebrow">Show.And.Tell</p>
 
           <h1>Find wildlife worth exploring.</h1>
 
@@ -65,9 +65,12 @@ export default function HomePage() {
               Report a Sighting
             </button>
 
-            <button className="secondary-button">
-              Explore Sightings
-            </button>
+            <button
+  className="secondary-button"
+  onClick={() => navigate("/sightings")}
+>
+  Explore Sightings
+</button>
           </div>
         </div>
 
@@ -105,9 +108,12 @@ export default function HomePage() {
             <h2>Recent Sightings</h2>
           </div>
 
-          <button className="text-button">
-            View All Sightings
-          </button>
+          <button
+  className="text-button"
+  onClick={() => navigate("/sightings")}
+>
+  View All Sightings
+</button>
         </div>
 
         {loading && (
@@ -162,13 +168,17 @@ export default function HomePage() {
           <p className="eyebrow">Field Guide</p>
           <h2>Start Exploring</h2>
 
-          <div className="guide-links">
-            <button>Browse Species</button>
-            <button>Find Wildlife</button>
-            <button>View Hunting Seasons</button>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
+          
+<div className="guide-links">
+  <button onClick={() => navigate("/about")}>
+    Browse Species
+  </button>
+
+  <button onClick={() => navigate("/report")}>
+    Find Wildlife
+  </button>
+
+  <button onClick={() => navigate("/links")}>
+    View Hunting Seasons
+  </button>
+</div>

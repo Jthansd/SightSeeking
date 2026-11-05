@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SightingCard from "../components/SightingCard";
@@ -65,11 +66,11 @@ export default function HomePage() {
             </button>
 
             <button
-  className="secondary-button"
-  onClick={() => navigate("/sightings")}
->
-  Explore Sightings
-</button>
+              className="secondary-button"
+              onClick={() => navigate("/sightings")}
+            >
+              Explore Sightings
+            </button>
           </div>
         </div>
 
@@ -108,42 +109,49 @@ export default function HomePage() {
           </div>
 
           <button
-  className="text-button"
-  onClick={() => navigate("/sightings")}
->
-  View All Sightings
-</button>
+            className="text-button"
+            onClick={() => navigate("/sightings")}
+          >
+            View All Sightings
+          </button>
         </div>
 
         {loading && (
-          <div className="status-card card">
-            <p>Loading sightings...</p>
+          <div className="status-card card" role="status">
+            <p>Loading recent sightings. Please wait...</p>
           </div>
         )}
 
         {error && (
-          <div className="status-card card">
-            <p>Unable to load sightings: {error}</p>
+          <div className="status-card card" role="alert">
+            <h3>Unable to load sightings</h3>
+            <p>
+              We couldn't load recent sightings right now. Please try again
+              later.
+            </p>
           </div>
         )}
 
         {!loading && !error && sightings.length === 0 && (
-          <div className="status-card card">
+          <div className="status-card card" role="status">
             <h3>No sightings yet</h3>
             <p>
-              Add the first wildlife sighting to start building the community
-              field guide.
+              Be the first to share a wildlife sighting and help grow our
+              community field guide!
             </p>
+            <button
+              className="primary-button"
+              onClick={() => navigate("/report")}
+            >
+              Report a Sighting
+            </button>
           </div>
         )}
 
         {!loading && !error && sightings.length > 0 && (
           <div className="sightings-grid">
             {sightings.slice(0, 6).map((sighting) => (
-              <SightingCard
-                key={sighting.id}
-                sighting={sighting}
-              />
+              <SightingCard key={sighting.id} sighting={sighting} />
             ))}
           </div>
         )}
@@ -167,17 +175,21 @@ export default function HomePage() {
           <p className="eyebrow">Field Guide</p>
           <h2>Start Exploring</h2>
 
-          
-<div className="guide-links">
-  <button onClick={() => navigate("/about")}>
-    Browse Species
-  </button>
+          <div className="guide-links">
+            <button onClick={() => navigate("/about")}>
+              Browse Species
+            </button>
 
-  <button onClick={() => navigate("/report")}>
-    Find Wildlife
-  </button>
+            <button onClick={() => navigate("/report")}>
+              Find Wildlife
+            </button>
 
-  <button onClick={() => navigate("/links")}>
-    View Hunting Seasons
-  </button>
-</div>
+            <button onClick={() => navigate("/links")}>
+              View Hunting Seasons
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

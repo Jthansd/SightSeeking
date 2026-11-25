@@ -1,7 +1,8 @@
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../api";
+import { useAuth } from "../auth/authContext";
 
 type SpeciesOption = {
   id: number;
@@ -12,6 +13,7 @@ type SpeciesOption = {
 
 export default function ReportSightingPage() {
   const navigate = useNavigate();
+  const { user, token, loading: authLoading, clearSession } = useAuth();
 
   const [speciesOptions, setSpeciesOptions] = useState<SpeciesOption[]>([]);
   const [speciesLoading, setSpeciesLoading] = useState(true);
@@ -124,9 +126,17 @@ export default function ReportSightingPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Tells the backend which logged-in user is reporting.
+          Authorization: `Token ${token}`,
         },
         body: JSON.stringify(formData),
       });
+
+      if (response.status === 401) {
+        // Token no longer valid (e.g. logged out on another device).
+        clearSession();
+        throw new Error("Your login has expired. Please log in again.");
+      }
 
       const data = await response.json();
 
@@ -158,6 +168,57 @@ export default function ReportSightingPage() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  // Viewing sightings is open to everyone, but reporting requires an account.
+  if (authLoading || !user) {
+    return (
+      <main className="report-page">
+        <div className="report-container">
+          <div className="report-heading">
+            <p className="eyebrow">Community Field Guide</p>
+            <h1>Report a Sighting</h1>
+          </div>
+
+          <div className="report-form card login-required">
+            {authLoading ? (
+              <p role="status">Checking your login...</p>
+            ) : (
+              <>
+                <h2>Log in to report a sighting</h2>
+                <p>
+                  You need a Sight Seeking account to share sightings. Anyone
+                  can browse sightings without one.
+                </p>
+                <div className="hero-actions">
+                  <Link
+                    to="/login"
+                    state={{ from: "/report" }}
+                    className="button primary-button"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/signup"
+                    state={{ from: "/report" }}
+                    className="button secondary-button"
+                  >
+                    Sign Up
+                  </Link>
+                  <Link
+                    to="/home"
+                    state={{ from: "/report" }}
+                    className="button tertiary-button"
+                  >
+                    View Sightings
+                  </Link>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </main>
+    );
   }
 
   return (

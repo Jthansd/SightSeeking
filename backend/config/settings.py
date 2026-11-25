@@ -27,7 +27,11 @@ load_dotenv(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8whq_nu#_1f-jzk6vg*c(*=dgbk!)h!$=@a1%5&8h8@%u)&c9u'
+# On Render, set SECRET_KEY to a long random value. The fallback is only for local dev.
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    'django-insecure-8whq_nu#_1f-jzk6vg*c(*=dgbk!)h!$=@a1%5&8h8@%u)&c9u',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
@@ -45,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    # Provides the authtoken table: one random login token per user.
+    'rest_framework',
+    'rest_framework.authtoken',
     'api',
 ]
 

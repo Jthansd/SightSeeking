@@ -65,6 +65,29 @@
   background: var(--gold-hover);
 }
 
+.nav-user {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-logout-button {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-logout-button:hover {
+  color: white;
+  border-color: white;
+}
+
 .mobile-menu-toggle {
   display: none;
   background: transparent;
@@ -105,5 +128,9 @@
   .nav-report-button {
     width: 100%;
     margin-top: 4px;
+  }
+
+  .nav-user {
+    padding: 8px 0;
   }
 }

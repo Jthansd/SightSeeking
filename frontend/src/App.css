@@ -75,6 +75,16 @@
   border: 1px solid var(--border);
 }
 
+.tertiary-button {
+  background: var(--green-3);
+  color: var(--green);
+  border: 1px solid var(--border);
+}
+
+.tertiary-button:hover {
+  background: var(--green-2);
+}
+
 
 /* =========================================================
    HOME PAGE CARDS
@@ -330,4 +340,57 @@
   .report-page {
     padding: 28px 16px 50px;
   }
+}
+
+/* =========================================================
+   LOG IN / SIGN UP
+   ========================================================= */
+
+.auth-container {
+  max-width: 480px;
+}
+
+.auth-container .form-group {
+  margin-bottom: 18px;
+}
+
+.form-hint {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.form-error {
+  color: #a12626;
+  margin-bottom: 16px;
+}
+
+.auth-container .primary-button {
+  width: 100%;
+}
+
+.auth-container .primary-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-switch {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.auth-switch a {
+  font-weight: 700;
+}
+
+.login-required {
+  padding: 28px;
+  text-align: center;
+}
+
+.login-required h2 {
+  margin-bottom: 8px;
+}
+
+.login-required .hero-actions {
+  justify-content: center;
 }

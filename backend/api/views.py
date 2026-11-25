@@ -1,11 +1,11 @@
 import json
 
-from django.contrib.auth import get_user_model
 from django.db import connection, transaction
 from django.http import JsonResponse
 from django.utils.dateparse import parse_datetime
 from django.views.decorators.csrf import csrf_exempt
 
+from .auth_views import get_token_user
 from .models import Animal_Sighting, Sighting, Species
 
 
@@ -71,6 +71,19 @@ def sightings(request):
     # ========================================================
 
     if request.method == "POST":
+
+        # Only logged-in users can report; the token identifies who.
+        user = get_token_user(request)
+
+        if user is None:
+            return JsonResponse(
+                {
+                    "error":
+                    "You must be logged in to report a sighting."
+                },
+                status=401
+            )
+
         try:
             data = json.loads(request.body)
 
@@ -154,26 +167,6 @@ def sightings(request):
                     {
                         "error":
                         "Invalid behavior."
-                    },
-                    status=400
-                )
-
-            # ------------------------------------------------
-            # Determine user
-            # ------------------------------------------------
-
-            User = get_user_model()
-
-            if request.user.is_authenticated:
-                user = request.user
-            else:
-                user = User.objects.first()
-
-            if user is None:
-                return JsonResponse(
-                    {
-                        "error":
-                        "No user exists in the database."
                     },
                     status=400
                 )

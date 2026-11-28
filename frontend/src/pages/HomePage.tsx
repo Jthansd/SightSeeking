@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SightingCard from "../components/SightingCard";
 import type { SightingApiResponse } from "../types";
 import { API_URL } from "../api";
+import SightingsMap from "../components/SightingsMap";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -153,9 +154,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="map-placeholder">
-            <span>Interactive map coming soon</span>
-          </div>
+          <SightingsMap sightings={sightings} />
         </div>
 
         <div className="quick-guide card">

@@ -394,3 +394,28 @@
 .login-required .hero-actions {
   justify-content: center;
 }
+
+
+
+/* =========================================================
+   MAP POPUP
+   ========================================================= */
+
+
+.map-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.map-popup p {
+  margin-top: 4px;
+}
+
+.sightings-map {
+  height: 400px;
+  width: 100%;
+  border-radius: 10px;
+  isolation: isolate;
+}

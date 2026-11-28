@@ -40,4 +40,9 @@ export type SightingApiResponse = {
   description: string;
   locationLongitude: number;
   locationLatitude: number;
+  observed_at?: string | null;
+  animal_count?: number;
+  behavior?: string;
+  notes?: string;
+  common_name?: string | null;
 };
